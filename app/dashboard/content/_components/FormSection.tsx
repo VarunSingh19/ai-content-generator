@@ -1,40 +1,34 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import { TEMPLATES } from '../../_components/TemplatelistSection';
 import Image from 'next/image';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Loader2Icon } from 'lucide-react';
+import { useFormInput } from '@/hooks/useFormInput';
 
-// Props interface
+// Assume useFormInput is a custom hook
+
 interface PROPS {
   selectedTemplate?: TEMPLATES;
   onFormSubmit: (data: Record<string, any>) => void;
   loading: boolean;
 }
 
-// Main component
 function FormSection({ selectedTemplate, onFormSubmit, loading }: PROPS) {
-  const [formData, setFormData] = useState<Record<string, any>>({});
+  // Use the hook at the top level of the component
+  const { formData, handleInputChange, resetForm } = useFormInput();
 
-  // Handle input changes (called on every input/textarea change)
-  const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  // Form submit handler
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onFormSubmit(formData); // Call the passed callback function with form data
+    onFormSubmit(formData); // Use formData from the hook
+    resetForm(); // Reset the form if needed
   };
 
   return (
     <div className="p-6 shadow-lg border rounded-lg bg-gradient-to-r from-gray-900 to-gray-800 text-white relative overflow-hidden">
-      {/* Background animation */}
+      {/* Background animations */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-0 right-0 w-full h-full bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -55,7 +49,6 @@ function FormSection({ selectedTemplate, onFormSubmit, loading }: PROPS) {
           <div key={index} className="my-2 flex flex-col gap-2 mb-7">
             <label className="font-bold text-indigo-300">{item.label}</label>
 
-            {/* Render Input or Textarea based on field type */}
             {item.field === 'input' ? (
               <Input
                 name={item.name}
