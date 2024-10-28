@@ -1,14 +1,11 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { TEMPLATES } from '../../_components/TemplatelistSection';
 import Image from 'next/image';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Loader2Icon } from 'lucide-react';
-import { useFormInput } from '@/hooks/useFormInput';
-
-// Assume useFormInput is a custom hook
 
 interface PROPS {
   selectedTemplate?: TEMPLATES;
@@ -17,13 +14,20 @@ interface PROPS {
 }
 
 function FormSection({ selectedTemplate, onFormSubmit, loading }: PROPS) {
-  // Use the hook at the top level of the component
-  const { formData, handleInputChange, resetForm } = useFormInput();
+  // Manage form state here using useState
+  const [formData, setFormData] = useState<Record<string, any>>({});
+
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onFormSubmit(formData); // Use formData from the hook
-    resetForm(); // Reset the form if needed
+    e.preventDefault(); // Prevent default form submission
+    onFormSubmit(formData); // Submit the form data via the prop function
+    setFormData({}); // Optionally reset the form after submission
   };
 
   return (
@@ -53,6 +57,7 @@ function FormSection({ selectedTemplate, onFormSubmit, loading }: PROPS) {
               <Input
                 name={item.name}
                 required={item?.required}
+                value={formData[item.name] || ''}
                 onChange={handleInputChange}
                 className="bg-gray-800 border border-gray-600 text-white focus:border-indigo-500 focus:ring-indigo-500"
               />
@@ -60,6 +65,7 @@ function FormSection({ selectedTemplate, onFormSubmit, loading }: PROPS) {
               <Textarea
                 name={item.name}
                 required={item?.required}
+                value={formData[item.name] || ''}
                 onChange={handleInputChange}
                 className="bg-gray-800 border border-gray-600 text-white focus:border-indigo-500 focus:ring-indigo-500"
               />
