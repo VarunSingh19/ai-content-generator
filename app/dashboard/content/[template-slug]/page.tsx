@@ -100,7 +100,6 @@ function CreateContent({ params }: PROPS) {
 
   return (
     <div className="relative p-8 min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white">
-      {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-[url('/placeholder.svg?height=1080&width=1920')] opacity-10 bg-cover bg-center"></div>
         <svg className="absolute inset-0 w-full h-full">
@@ -113,7 +112,6 @@ function CreateContent({ params }: PROPS) {
         </svg>
       </div>
 
-      {/* Animated Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
