@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React, { useState } from "react";
 import { TEMPLATES } from "../../_components/TemplatelistSection";
 import Image from "next/image";
@@ -9,19 +9,21 @@ import { Loader2Icon } from "lucide-react";
 
 interface PROPS {
   selectedTemplate?: TEMPLATES;
-  useFormInput: any;
+  onFormSubmit: (data: any) => void;
   loading: boolean;
 }
 
-function FormSection({ selectedTemplate, useFormInput, loading }: PROPS) {
-  const [formData, setFormData] = useState<any>();
-  const handleInputChange = (event: any) => {
+function FormSection({ selectedTemplate, onFormSubmit, loading }: PROPS) {
+  const [formData, setFormData] = useState<Record<string, any>>({});
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevData: Record<string, any>) => ({ ...prevData, [name]: value }));
   };
-  const onSubmit = (e: any) => {
+
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    useFormInput(formData);
+    onFormSubmit(formData);
   };
 
   return (
