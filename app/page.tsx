@@ -24,25 +24,25 @@ export default function Home() {
 
   const features = [
     {
-      icon: FileText,
+      icon: <FileText className="w-7 h-7" />,
       title: "Smart Templates",
       description: "AI-powered templates for every content need",
       color: "from-cyan-500 to-blue-600"
     },
     {
-      icon: Sliders,
+      icon: <Sliders className="w-7 h-7" />,
       title: "Adaptive Learning",
       description: "Our AI evolves with your content preferences",
       color: "from-indigo-500 to-purple-600"
     },
     {
-      icon: BookOpen,
+      icon: <BookOpen className="w-7 h-7" />,
       title: "Knowledge Integration",
       description: "Seamlessly blend AI insights with your expertise",
       color: "from-fuchsia-500 to-pink-600"
     },
     {
-      icon: MessageCircle,
+      icon: <MessageCircle className="w-7 h-7" />,
       title: "AI Collaboration",
       description: "Real-time AI assistance in your workflow",
       color: "from-rose-500 to-red-600"
@@ -196,53 +196,15 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * index }}
-              whileHover={{ y: -5, boxShadow: "0 10px 30px -15px rgba(0, 0, 255, 0.3)" }}
             >
               <div className={`w-14 h-14 bg-gradient-to-r ${feature.color} rounded-xl flex items-center justify-center mb-6`}>
-                <feature.icon className="w-7 h-7" />
+                {feature.icon}
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-white">{feature.title}</h3>
-              <p className="text-gray-400 mb-6">{feature.description}</p>
-              <motion.button
-                className="text-blue-400 flex items-center gap-2 hover:gap-3 transition-all duration-300"
-                aria-label={`Learn more about ${feature.title}`}
-                whileHover={{ x: 5, color: "#60A5FA" }}
-              >
-                Learn more <ArrowRight className="w-4 h-4" />
-              </motion.button>
+              <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+              <p className="text-gray-400">{feature.description}</p>
             </motion.div>
           ))}
         </div>
-      </div>
-
-      {/* AI-generated Content Preview */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pb-24">
-        <motion.div
-          className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-        >
-          <h2 className="text-3xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
-            AI-Generated Content Preview
-          </h2>
-          <div className="flex flex-col md:flex-row gap-8">
-            <div className="flex-1">
-              <h3 className="text-xl font-semibold mb-4 text-white">Input</h3>
-              <div className="bg-gray-900 rounded-lg p-4 text-gray-300">
-                Write a short blog post about the future of AI in content creation.
-              </div>
-            </div>
-            <div className="flex-1">
-              <h3 className="text-xl font-semibold mb-4 text-white">AI-Generated Output</h3>
-              <div className="bg-gray-900 rounded-lg p-4 text-gray-300">
-                <p>The future of AI in content creation is nothing short of revolutionary. As natural language processing and machine learning technologies continue to advance, we're witnessing a paradigm shift in how content is produced and consumed.</p>
-                <p className="mt-2">AI-powered tools are not just augmenting human creativity; they're opening up new realms of possibility. From personalized articles tailored to individual readers' preferences to real-time content adaptation based on user engagement, the potential applications are boundless.</p>
-                <p className="mt-2">However, it's crucial to remember that AI is a tool to enhance human creativity, not replace it. The most effective content strategies will likely involve a symbiosis of human insight and AI capabilities, leading to more engaging, relevant, and impactful content than ever before.</p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </div>
   )
