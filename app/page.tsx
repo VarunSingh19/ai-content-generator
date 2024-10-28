@@ -1,7 +1,15 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { ArrowRight, FileText, Sliders, BookOpen, MessageCircle, User, Menu, X, Brain } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import { FileText } from 'lucide-react'
+import { Sliders } from 'lucide-react'
+import { BookOpen } from 'lucide-react'
+import { MessageCircle } from 'lucide-react'
+import { User } from 'lucide-react'
+import { Menu } from 'lucide-react'
+import { X } from 'lucide-react'
+import { Brain } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { motion, useAnimation } from 'framer-motion'
 
