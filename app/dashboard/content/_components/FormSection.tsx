@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from "react";
 import { TEMPLATES } from "../../_components/TemplatelistSection";
-import Image from "next/image";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -9,7 +8,7 @@ import { Loader2Icon } from "lucide-react";
 
 interface PROPS {
   selectedTemplate?: TEMPLATES;
-  onFormSubmit: (data: any) => void;
+  onFormSubmit: (data: Record<string, any>) => void; // Correct prop type
   loading: boolean;
 }
 
@@ -18,29 +17,17 @@ function FormSection({ selectedTemplate, onFormSubmit, loading }: PROPS) {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
-    setFormData((prevData: Record<string, any>) => ({ ...prevData, [name]: value }));
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onFormSubmit(formData);
+    onFormSubmit(formData); // Now correctly calling the prop function
   };
 
   return (
     <div className="p-6 shadow-lg border rounded-lg bg-gradient-to-r from-gray-900 to-gray-800 text-white relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-0 w-full h-full bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
-      </div>
-
-      {selectedTemplate?.icon && (
-        <Image src={selectedTemplate.icon} alt="icon" width={70} height={70} />
-      )}
-      <h2 className="font-bold text-2xl mb-2 text-indigo-400">
-        {selectedTemplate?.name}
-      </h2>
-      <p className="text-gray-400 text-sm">{selectedTemplate?.desc}</p>
-
+      {/* Form content */}
       <form className="mt-6" onSubmit={onSubmit}>
         {selectedTemplate?.form?.map((item, index) => (
           <div key={index} className="my-2 flex flex-col gap-2 mb-7">
@@ -75,5 +62,6 @@ function FormSection({ selectedTemplate, onFormSubmit, loading }: PROPS) {
     </div>
   );
 }
+
 
 export default FormSection;
