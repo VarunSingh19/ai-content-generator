@@ -33,10 +33,11 @@ function Layout({
             >
               <Header />
               {React.Children.map(children, child =>
-                React.isValidElement(child)
+                React.isValidElement(child) && 'isNavExpanded' in child.props
                   ? React.cloneElement(child, { isNavExpanded })
                   : child
               )}
+
             </motion.div>
           </div>
         </UpdateCreditUsageContext.Provider>

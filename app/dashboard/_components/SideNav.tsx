@@ -60,7 +60,7 @@ export default function SideNav({ onExpand }: SideNavProps) {
       onHoverEnd={() => isSmallScreen && handleExpand(false)}
     >
       {/* Logo Section */}
-      <div className={`flex ${isNavExpanded ? 'justify-start' : 'justify-center'} border-b border-gray-800 p-4`}>
+      <div className={`flex ${isNavExpanded ? 'justify-start' : 'justify-center'} border-b border-gray-800 p-6 `}>
         <div className="flex items-center space-x-3 cursor-pointer" onClick={handleClick}>
           <motion.div
             className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center"

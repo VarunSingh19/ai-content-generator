@@ -127,7 +127,7 @@ function CreateContent({ params }: PROPS) {
       </Link>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4 py-5">
-        <div className="lg:col-span-1 md:col-span-1 col-span-1 bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700">
+        <div className="lg:col-span-1 md:col-span-1 col-span-1 backdrop-blur-sm rounded-2xl p-8 border border-gray-700">
           <FormSection
             selectedTemplate={selectedTemplate}
             onFormSubmit={GenerateAIContent} // Renamed the prop
@@ -135,7 +135,7 @@ function CreateContent({ params }: PROPS) {
           />
 
         </div>
-        <div className="lg:col-span-2 md:col-span-1 col-span-1 bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 text-white">
+        <div className="lg:col-span-2 md:col-span-1 col-span-1  backdrop-blur-sm rounded-2xl p-8 border border-gray-700 text-white">
           <OutputSection aiOutput={aiOutputText || ""} />
         </div>s
       </div>

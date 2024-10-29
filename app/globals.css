@@ -89,3 +89,9 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* Add this to your global CSS file or inline styles */
+.toastui-editor-contents {
+  color: white;
+  /* Set text color to white */
+}
