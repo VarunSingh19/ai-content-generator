@@ -12,7 +12,7 @@ export const aiOutput = pgTable("aiOutput", {
 
 export const UserSubscription = pgTable('userSubscription', {
   id: serial('id').primaryKey(),
-  email: varchar('email'),
+  email: varchar('email').notNull(),
   userName: varchar('userName'),
   active: boolean('active'),
   paymentId: varchar('paymentId'),

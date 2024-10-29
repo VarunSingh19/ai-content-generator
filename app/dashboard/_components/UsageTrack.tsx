@@ -37,7 +37,11 @@ export default function UsageTrack() {
 
     const GetData = async () => {
         try {
-            const fullName = `${user?.firstName} ${user?.lastName}`
+            const fullName = user ? `${user.firstName} ${user.lastName}`.trim() : ''
+            if (!fullName) {
+                console.log("User name not available")
+                return
+            }
             console.log("Searching for user:", fullName)
 
             const result: HISTORY[] = await db.select()
@@ -53,18 +57,27 @@ export default function UsageTrack() {
     }
 
     const IsUserSubscribed = async () => {
-        const result = await db.select().from(UserSubscription)
-            .where(eq(UserSubscription.email, user?.primaryEmailAddress?.emailAddress))
-        console.log("Subscription check result:", result)
-        if (result.length > 0) {
-            setUserSubscription(true)
-            setMaxWords(100000)
+        const userEmail = user?.primaryEmailAddress?.emailAddress
+        if (!userEmail) {
+            console.log("User email not available")
+            return
+        }
+        try {
+            const result = await db.select()
+                .from(UserSubscription)
+                .where(eq(UserSubscription.email, user?.primaryEmailAddress?.emailAddress as string))
+            console.log("Subscription check result:", result)
+            if (result.length > 0) {
+                setUserSubscription(true)
+                setMaxWords(100000)
+            }
+        } catch (error) {
+            console.error("Error checking user subscription:", error)
         }
     }
 
     const GetTotalUsage = (result: HISTORY[]) => {
         let total = result.reduce((acc, element) => {
-            console.log("Current AI response:", element.aiResponse)
             return acc + (element.aiResponse ? element.aiResponse.split(/\s+/).length : 0)
         }, 0)
         console.log("Total words:", total)
