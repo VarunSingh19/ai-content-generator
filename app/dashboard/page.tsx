@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import SearchSection from './_components/SearchSection'
 import TemplatelistSection from './_components/TemplatelistSection'
 
-export default function Dashboard() {
+export default function Dashboard({ isNavExpanded }: { isNavExpanded: boolean }) {
   const [userSearchInput, setUserSearchInput] = useState<string>('')
 
   return (
@@ -16,7 +16,7 @@ export default function Dashboard() {
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className="max-w-7xl mx-auto"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         initial={{ y: -20 }}
         animate={{ y: 0 }}
         transition={{ delay: 0.2, type: 'spring', stiffness: 300 }}
@@ -24,7 +24,7 @@ export default function Dashboard() {
         <SearchSection onSearchInput={(value: string) => setUserSearchInput(value)} />
       </motion.div>
       <motion.div
-        className="max-w-7xl mx-auto"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         initial={{ y: 20 }}
         animate={{ y: 0 }}
         transition={{ delay: 0.4, type: 'spring', stiffness: 300 }}
